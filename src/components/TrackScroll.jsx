@@ -83,7 +83,7 @@ export default function TrackScroll() {
             <h2 className="font-display font-700 uppercase text-3xl md:text-5xl leading-tight mb-4">
               2.439 Miles.
               <br />
-              Every Watt Counts.
+              Every Move Counts.
             </h2>
             <p className="text-slate text-sm md:text-base max-w-md mb-8">
               Our driving strategy on the Indianapolis Motor Speedway infield road course comes
