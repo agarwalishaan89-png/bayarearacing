@@ -114,13 +114,11 @@ html {
 }
 
 /* Flowing line background — seamless left/right drift for FlowingLines.jsx */
-@keyframes flowScrollLeft {
-  from { transform: translateX(0); }
-  to { transform: translateX(-1200px); }
-}
-@keyframes flowScrollRight {
-  from { transform: translateX(-1200px); }
-  to { transform: translateX(0); }
+/* Flowing line background — dash-offset travel along a static path,
+   ported from geodo.ai's BackgroundPaths technique */
+@keyframes flowPathDash {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -2; }
 }
 
 .eyebrow {
