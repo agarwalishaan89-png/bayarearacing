@@ -3,13 +3,13 @@
 // at x=tileWidth always matches the point at x=0 — so animating the whole
 // path left by exactly one tile width loops with no visible seam.
 function buildFlowPath({
-  tileWidth = 1200,
-  baseline = 120,
-  amplitude = 22,
-  frequency = 2,
-  phase = 0,
-  harmonicMix = 0.3,
-  harmonicMult = 2.6,
+  tileWidth,
+  baseline,
+  amplitude,
+  frequency,
+  phase,
+  harmonicMix,
+  harmonicMult,
   points = 140,
 }) {
   const totalWidth = tileWidth * 2
@@ -27,23 +27,46 @@ function buildFlowPath({
   return d
 }
 
-const LAYERS = [
-  { baseline: 60, amplitude: 18, frequency: 2, phase: 0.4, opacity: 0.35, duration: 26, reverse: false, color: 'rgba(255,255,255,0.9)' },
-  { baseline: 95, amplitude: 26, frequency: 3, phase: 1.8, opacity: 0.22, duration: 34, reverse: true, color: 'rgba(255,255,255,0.8)' },
-  { baseline: 130, amplitude: 20, frequency: 2, phase: 3.1, opacity: 0.4, duration: 20, reverse: false, color: 'rgba(56,189,248,0.55)' },
-  { baseline: 150, amplitude: 30, frequency: 4, phase: 0.9, opacity: 0.18, duration: 40, reverse: true, color: 'rgba(255,255,255,0.7)' },
-  { baseline: 170, amplitude: 16, frequency: 3, phase: 4.2, opacity: 0.28, duration: 30, reverse: false, color: 'rgba(255,255,255,0.85)' },
-]
+// Deterministic pseudo-random so the pattern is stable across re-renders
+// within a single page load, without needing React state.
+function mulberry32(seed) {
+  return function () {
+    seed |= 0
+    seed = (seed + 0x6d2b79f5) | 0
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+function generateLines(count, seed = 7) {
+  const rand = mulberry32(seed)
+  const lines = []
+  for (let i = 0; i < count; i++) {
+    const t = i / (count - 1)
+    lines.push({
+      baseline: 6 + t * 188 + (rand() - 0.5) * 10,
+      amplitude: 8 + rand() * 24,
+      frequency: 1 + Math.floor(rand() * 3), // integer -> seamless loop
+      phase: rand() * Math.PI * 2,
+      harmonicMix: 0.1 + rand() * 0.25,
+      harmonicMult: 2 + rand() * 1.6,
+      opacity: 0.06 + rand() * 0.16,
+      duration: 22 + rand() * 34,
+      reverse: rand() > 0.5,
+      color: rand() > 0.88 ? 'rgba(56,189,248,0.7)' : 'rgba(255,255,255,0.9)',
+    })
+  }
+  return lines
+}
+
+const LINES = generateLines(28)
 
 export default function FlowingLines({ className = '' }) {
   return (
     <div className={`absolute overflow-hidden pointer-events-none ${className}`} aria-hidden="true">
-      <svg
-        viewBox="0 0 2400 200"
-        preserveAspectRatio="none"
-        className="w-full h-full"
-      >
-        {LAYERS.map((layer, i) => (
+      <svg viewBox="0 0 2400 200" preserveAspectRatio="none" className="w-full h-full">
+        {LINES.map((layer, i) => (
           <path
             key={i}
             d={buildFlowPath({ tileWidth: 1200, ...layer })}
