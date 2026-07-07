@@ -18,7 +18,7 @@ export default function Media() {
       <div className="relative max-w-7xl mx-auto px-6 md:px-10">
         <Reveal>
           <div className="relative flex flex-wrap items-end justify-between gap-6 mb-12">
-            <FlowingLines className="inset-x-0 -top-24 h-[220px]" />
+            <FlowingLines className="inset-x-0 -top-24 h-[120px]" />
             <div className="relative">
               <div className="eyebrow text-sky text-xs mb-4">Media</div>
               <h2 className="font-display font-700 uppercase text-4xl md:text-5xl leading-tight">
