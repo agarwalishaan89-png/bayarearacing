@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Panel cut — used on cards/blocks for the racing-livery corner clip */
+.panel-cut {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+}
+.panel-cut-lg {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
+}
+
+/* HUD corner brackets */
+.hud-corners {
+  position: relative;
+}
+.hud-corners::before,
+.hud-corners::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: #38BDF8;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+.hud-corners::before {
+  top: 0;
+  left: 0;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.hud-corners::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+.hud-corners:hover::before,
+.hud-corners:hover::after {
+  opacity: 1;
+}
+
+/* Idle pulsing glow on HUD corners — pauses on hover so the hover state stays crisp */
+@keyframes cornerPulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.9; }
+}
+.hud-corners::before,
+.hud-corners::after {
+  animation: cornerPulse 3.2s ease-in-out infinite;
+}
+.hud-corners:hover::before,
+.hud-corners:hover::after {
+  animation-play-state: paused;
+}
+
+
+/* Continuous marquee scroll for the sponsor logo strip */
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marqueeScroll 28s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Hero stripe sweep-in */
+@keyframes sweepIn {
+  from {
+    transform: translateX(-100%) skewX(-12deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) skewX(-12deg);
+    opacity: 1;
+  }
+}
+.stripe-sweep {
+  animation: sweepIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes riseIn {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.rise-in {
+  animation: riseIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Flowing line background — seamless left/right drift for FlowingLines.jsx */
+@keyframes flowScrollLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-1200px); }
+}
+@keyframes flowScrollRight {
+  from { transform: translateX(-1200px); }
+  to { transform: translateX(0); }
+}
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Track for tabular figures on stat readouts */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
