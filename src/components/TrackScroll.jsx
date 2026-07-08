@@ -5,10 +5,6 @@ import { Flame, Wind, Gauge } from 'lucide-react'
 // diagram (14 turns). Straight segments with rounded joins, matching how
 // IMS's own track maps are drawn — this is a best-effort reconstruction
 // from the published layout, not surveyed GPS data.
-// Traced from the official Indianapolis Motor Speedway infield road course
-// diagram (14 turns). Curved bezier segments approximating the actual
-// sweeps and chicanes — a best-effort reconstruction from the published
-// layout, not surveyed GPS data.
 const TRACK_D =
   'M754,518 ' +
   'L290,518 ' +
@@ -84,7 +80,7 @@ export default function TrackScroll() {
   const wrapperRef = useRef(null)
   const pathRef = useRef(null)
   const [progress, setProgress] = useState(0)
-  const [point, setPoint] = useState({ x: 700, y: 520 })
+  const [point, setPoint] = useState({ x: 754, y: 518 })
   const [pathLength, setPathLength] = useState(0)
 
   useEffect(() => {
@@ -195,7 +191,7 @@ export default function TrackScroll() {
               ))}
 
               {/* Start/finish marker */}
-              <rect x="640" y="510" width="20" height="20" fill="white" opacity="0.6" />
+              <rect x="512" y="508" width="20" height="20" fill="white" opacity="0.6" />
 
               {/* Car marker */}
               <circle
