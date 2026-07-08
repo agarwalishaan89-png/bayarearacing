@@ -14,7 +14,7 @@ const PHOTOS = [
 
 export default function Media() {
   return (
-   <section id="media" className="relative bg-ink py-24 md:py-32 overflow-hidden">
+    <section id="media" className="relative bg-ink py-24 md:py-32 overflow-hidden">
       <FlowingLines className="inset-x-0 top-16 md:top-20 h-[380px] md:h-[440px]" />
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-10">
@@ -38,7 +38,7 @@ export default function Media() {
             </a>
           </div>
         </Reveal>
-     
+
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[160px] md:auto-rows-[220px]">
           {PHOTOS.map((p, i) => (
             <Reveal
@@ -46,7 +46,7 @@ export default function Media() {
               delay={i * 80}
               className={i === 0 ? 'col-span-2 row-span-2 md:col-span-2 md:row-span-2' : ''}
             >
-              <a
+              
                 href="https://www.instagram.com/bayarea.racing/"
                 target="_blank"
                 rel="noopener noreferrer"
