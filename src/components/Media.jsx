@@ -14,7 +14,7 @@ const PHOTOS = [
 
 export default function Media() {
   return (
-   <section id="media" className="relative bg-ink py-24 md:py-32 overflow-hidden">
+    <section id="media" className="relative bg-ink py-24 md:py-32 overflow-hidden">
       <FlowingLines className="inset-x-0 top-16 md:top-20 h-[380px] md:h-[440px]" />
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-10">
@@ -27,7 +27,7 @@ export default function Media() {
                 to the track
               </h2>
             </div>
-            
+            <a
               href="https://www.instagram.com/bayarea.racing/"
               target="_blank"
               rel="noopener noreferrer"
