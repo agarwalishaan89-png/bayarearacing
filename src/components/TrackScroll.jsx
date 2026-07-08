@@ -23,17 +23,17 @@ const TRACK_D =
   'C755,285 758,290 758,270 ' +    // Turn 7 corner (up)
   'L758,215 ' +
   'C758,200 745,195 735,198 ' +    // Turn 8
-  'L855,198 ' +                    // chicane flat to Turn 9
-  'C858,160 820,100 785,63 ' +     // Turn 9 -> Turn 10 (hook loop)
-  'C830,50 900,55 950,80 ' +       // Turn 10 -> sweep right
-  'C980,95 1000,110 1015,132 ' +   // -> Turn 11
-  'C1035,160 1058,220 1058,270 ' + // Turn 11 -> down to Turn 12
+  'L800,198 ' +                    // shorter chicane top -> Turn 9 closer to 8
+  'C800,150 793,95 785,63 ' +      // Turn 9 -> Turn 10, straight up beneath 10
+  'C830,50 900,55 950,72 ' +       // Turn 10 -> sweep right
+  'C980,82 1000,88 1015,95 ' +     // -> Turn 11 (raised apex)
+  'C1042,112 1058,175 1058,270 ' + // Turn 11 -> down to Turn 12
   'C1058,282 1058,288 1055,290 ' + // Turn 12
-  'C1010,300 960,310 940,325 ' +   // Turn 12 -> toward Turn 13
-  'C925,335 920,340 930,338 ' +    // Turn 13
-  'C955,350 1000,375 1030,385 ' +  // Turn 13 -> toward Turn 14
-  'C1050,395 1060,398 1055,405 ' + // Turn 14
-  'C980,425 850,470 700,520 ' +    // diagonal back to start/finish
+  'C1010,300 960,310 945,335 ' +   // Turn 12 -> Turn 13 (kink in)
+  'C935,350 945,360 962,372 ' +    // Turn 13 -> sweep back out
+  'C992,398 1010,440 1005,480 ' +  // sweep down toward Turn 14
+  'C1000,502 985,512 958,516 ' +   // Turn 14, rounding out
+  'L700,520 ' +                    // straight into start/finish, parallel to Turn 1
   'Z'
 
 const TURNS = [
@@ -45,12 +45,12 @@ const TURNS = [
   { num: 6, x: 222, y: 278, dx: 4, dy: -28 },
   { num: 7, x: 758, y: 340, dx: 0, dy: 32 },
   { num: 8, x: 735, y: 198, dx: -32, dy: 0 },
-  { num: 9, x: 855, y: 198, dx: 32, dy: 0 },
+  { num: 9, x: 795, y: 150, dx: 20, dy: -10 },
   { num: 10, x: 785, y: 63, dx: -14, dy: -28 },
-  { num: 11, x: 1015, y: 132, dx: 22, dy: -20 },
+  { num: 11, x: 1015, y: 95, dx: 22, dy: -20 },
   { num: 12, x: 1055, y: 290, dx: 34, dy: 0 },
-  { num: 13, x: 930, y: 338, dx: -6, dy: 28 },
-  { num: 14, x: 1055, y: 405, dx: 34, dy: 10 },
+  { num: 13, x: 945, y: 335, dx: -20, dy: 20 },
+  { num: 14, x: 985, y: 500, dx: 25, dy: 15 },
 ]
 
 const PHASES = [
