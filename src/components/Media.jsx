@@ -15,7 +15,7 @@ const PHOTOS = [
 export default function Media() {
   return (
     <section id="media" className="relative bg-ink py-24 md:py-32 overflow-hidden">
-      <FlowingLines className="inset-x-0 top-16 md:top-20 h-[0px] md:h-[60px]" />
+      <FlowingLines className="inset-x-0 top-16 md:top-20 h-[300px] md:h-[360px]" />
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-10">
         <Reveal>
