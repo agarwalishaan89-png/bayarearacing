@@ -11,33 +11,29 @@ import { Flame, Wind, Gauge } from 'lucide-react'
 // layout, not surveyed GPS data.
 const TRACK_D =
   'M700,520 ' +
-  'L270,520 ' +
-  'C240,520 210,512 195,495 ' +        // Turn 1
-  'C165,460 140,460 150,435 ' +        // Turn 2 (snake in)
-  'C160,410 120,405 105,380 ' +        // Turn 3 (snake out)
-  'C85,345 70,335 62,318 ' +           // approach Turn 4
-  'C50,295 60,280 85,278 ' +           // Turn 4 hairpin
-  'C115,275 135,290 160,292 ' +        // Turn 5
-  'C185,294 200,280 222,278 ' +        // Turn 6
-  'C255,275 280,295 300,310 ' +        // transition to back straight
-  'L758,335 ' +                        // back straight
-  'C775,340 758,300 758,240 ' +        // Turn 7 (kink up)
-  'L758,205 ' +
-  'C745,198 738,196 735,198 ' +        // Turn 8
-  'C775,197 815,198 855,198 ' +        // chicane top
-  'C875,198 880,160 865,125 ' +        // Turn 9 rising
-  'C845,90 815,72 785,63 ' +           // Turn 10 apex
-  'C815,48 865,65 900,88 ' +           // sweep toward 11
-  'C950,112 990,118 1015,132 ' +       // Turn 11
-  'C1040,148 1058,175 1058,225 ' +     // curve down back stretch
-  'L1058,265 ' +
-  'C1058,280 1060,288 1055,290 ' +     // Turn 12
-  'C1015,298 975,308 950,320 ' +       // sweep toward 13
-  'C935,328 928,332 930,338 ' +        // Turn 13
-  'C955,352 1010,375 1040,388 ' +      // sweep toward 14
-  'C1060,397 1070,400 1055,405 ' +     // Turn 14
-  'C1000,422 930,455 850,478 ' +       // sweep down to front straight
-  'C790,498 740,512 700,520 ' +        // rejoin start/finish
+  'L290,520 ' +
+  'C260,520 235,515 218,500 ' +    // Turn 1
+  'C195,480 195,465 200,452 ' +    // into Turn 2
+  'C205,438 175,435 150,432 ' +    // Turn 2 -> Turn 3 (snake kink)
+  'C110,428 70,390 62,340 ' +      // Turn 3 -> Turn 4 sweep
+  'C55,305 75,280 130,282 ' +      // Turn 4 hairpin
+  'C145,283 150,290 160,292 ' +    // -> Turn 5
+  'C180,295 200,280 222,278 ' +    // Turn 5 -> Turn 6
+  'L735,285 ' +                    // long top-mid straight
+  'C755,285 758,290 758,270 ' +    // Turn 7 corner (up)
+  'L758,215 ' +
+  'C758,200 745,195 735,198 ' +    // Turn 8
+  'L855,198 ' +                    // chicane flat to Turn 9
+  'C858,160 820,100 785,63 ' +     // Turn 9 -> Turn 10 (hook loop)
+  'C830,50 900,55 950,80 ' +       // Turn 10 -> sweep right
+  'C980,95 1000,110 1015,132 ' +   // -> Turn 11
+  'C1035,160 1058,220 1058,270 ' + // Turn 11 -> down to Turn 12
+  'C1058,282 1058,288 1055,290 ' + // Turn 12
+  'C1010,300 960,310 940,325 ' +   // Turn 12 -> toward Turn 13
+  'C925,335 920,340 930,338 ' +    // Turn 13
+  'C955,350 1000,375 1030,385 ' +  // Turn 13 -> toward Turn 14
+  'C1050,395 1060,398 1055,405 ' + // Turn 14
+  'C980,425 850,470 700,520 ' +    // diagonal back to start/finish
   'Z'
 
 const TURNS = [
