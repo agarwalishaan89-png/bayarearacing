@@ -10,47 +10,50 @@ import { Flame, Wind, Gauge } from 'lucide-react'
 // sweeps and chicanes — a best-effort reconstruction from the published
 // layout, not surveyed GPS data.
 const TRACK_D =
-  'M700,520 ' +
-  'L290,520 ' +
-  'C260,520 235,515 218,500 ' +    // Turn 1
-  'C195,480 195,465 200,452 ' +    // into Turn 2
-  'C205,438 175,435 150,432 ' +    // Turn 2 -> Turn 3 (snake kink)
-  'C110,428 70,390 62,340 ' +      // Turn 3 -> Turn 4 sweep
-  'C55,305 75,280 130,282 ' +      // Turn 4 hairpin
-  'C145,283 150,290 160,292 ' +    // -> Turn 5
-  'C180,295 200,280 222,278 ' +    // Turn 5 -> Turn 6
-  'L735,285 ' +                    // long top-mid straight
-  'C755,285 758,290 758,270 ' +    // Turn 7 corner (up)
-  'L758,215 ' +
-  'C758,200 745,195 735,198 ' +    // Turn 8
-  'L800,198 ' +                    // shorter chicane top -> Turn 9 closer to 8
-  'C800,150 793,95 785,63 ' +      // Turn 9 -> Turn 10, straight up beneath 10
-  'C830,50 900,55 950,72 ' +       // Turn 10 -> sweep right
-  'C980,82 1000,88 1015,95 ' +     // -> Turn 11 (raised apex)
-  'C1042,112 1058,175 1058,270 ' + // Turn 11 -> down to Turn 12
-  'C1058,282 1058,288 1055,290 ' + // Turn 12
-  'C1010,300 960,310 945,335 ' +   // Turn 12 -> Turn 13 (kink in)
-  'C935,350 945,360 962,372 ' +    // Turn 13 -> sweep back out
-  'C992,398 1010,440 1005,480 ' +  // sweep down toward Turn 14
-  'C1000,502 985,512 958,516 ' +   // Turn 14, rounding out
-  'L700,520 ' +                    // straight into start/finish, parallel to Turn 1
+  'M754,518 ' +
+  'L290,518 ' +
+  'C260,518 235,514 218,500 ' +     // Turn 1
+  'C205,490 205,480 210,472 ' +     // approach Turn 2
+  'C215,466 200,464 190,460 ' +     // Turn 2
+  'C160,450 130,455 122,446 ' +     // sweep to Turn 3
+  'C95,420 90,380 90,341 ' +        // Turn 3 -> Turn 4 hairpin
+  'C90,310 130,318 160,320 ' +      // Turn 4 -> approach Turn 5
+  'C190,322 205,318 224,316 ' +     // Turn 5
+  'C235,314 240,304 247,302 ' +     // Turn 6
+  'L771,296 ' +                     // long straight to Turn 7
+  'C790,296 787,280 787,260 ' +     // Turn 7 (pedestrian bridge kink)
+  'L787,220 ' +
+  'C787,205 780,198 787,196 ' +     // Turn 8
+  'L810,196 ' +
+  'C815,180 818,165 821,154 ' +     // up to Turn 9
+  'C825,135 828,115 833,101 ' +     // Turn 9 -> Turn 10
+  'C860,90 920,92 970,96 ' +        // Turn 10 sweep right
+  'C1000,98 1015,100 1027,106 ' +   // Turn 11 apex
+  'C1050,118 1064,150 1064,220 ' +  // down right side
+  'L1064,300 ' +
+  'C1064,320 1064,330 1064,334 ' +  // Turn 12
+  'C1030,338 1005,338 995,338 ' +   // Turn 13
+  'C985,340 985,350 990,360 ' +
+  'C1000,390 1000,440 995,478 ' +   // sweep down to Turn 14
+  'C993,495 970,505 940,510 ' +     // Turn 14 rounding
+  'L754,518 ' +
   'Z'
 
 const TURNS = [
-  { num: 1, x: 255, y: 517, dx: 0, dy: 34 },
-  { num: 2, x: 200, y: 452, dx: -28, dy: 10 },
-  { num: 3, x: 130, y: 432, dx: -34, dy: 0 },
-  { num: 4, x: 62, y: 318, dx: -36, dy: -4 },
-  { num: 5, x: 160, y: 292, dx: -6, dy: -28 },
-  { num: 6, x: 222, y: 278, dx: 4, dy: -28 },
-  { num: 7, x: 758, y: 340, dx: 0, dy: 32 },
-  { num: 8, x: 735, y: 198, dx: -32, dy: 0 },
-  { num: 9, x: 795, y: 150, dx: 20, dy: -10 },
-  { num: 10, x: 785, y: 63, dx: -14, dy: -28 },
-  { num: 11, x: 1015, y: 95, dx: 22, dy: -20 },
-  { num: 12, x: 1055, y: 290, dx: 34, dy: 0 },
-  { num: 13, x: 945, y: 335, dx: -20, dy: 20 },
-  { num: 14, x: 985, y: 500, dx: 25, dy: 15 },
+  { num: 1, x: 218, y: 500, dx: 0, dy: 30 },
+  { num: 2, x: 190, y: 460, dx: -25, dy: 10 },
+  { num: 3, x: 122, y: 446, dx: -30, dy: 5 },
+  { num: 4, x: 90, y: 341, dx: -32, dy: 0 },
+  { num: 5, x: 224, y: 316, dx: -5, dy: -25 },
+  { num: 6, x: 247, y: 302, dx: 10, dy: -25 },
+  { num: 7, x: 787, y: 296, dx: 0, dy: 30 },
+  { num: 8, x: 787, y: 196, dx: -28, dy: 0 },
+  { num: 9, x: 821, y: 154, dx: 22, dy: -8 },
+  { num: 10, x: 833, y: 101, dx: -10, dy: -25 },
+  { num: 11, x: 1027, y: 106, dx: 20, dy: -20 },
+  { num: 12, x: 1064, y: 334, dx: 30, dy: 0 },
+  { num: 13, x: 995, y: 338, dx: -25, dy: 5 },
+  { num: 14, x: 995, y: 478, dx: 25, dy: 15 },
 ]
 
 const PHASES = [
