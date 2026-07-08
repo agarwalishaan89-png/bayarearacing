@@ -1,15 +1,31 @@
 import { useEffect, useRef, useState } from 'react'
 import { Flame, Wind, Gauge } from 'lucide-react'
 
-// Stylized closed-loop circuit shape — evocative of an infield road course
-// (front straight, hairpin, technical infield esses, back stretch) rather
-// than a literal survey of Indianapolis Motor Speedway's actual geometry.
+// Traced from the official Indianapolis Motor Speedway infield road course
+// diagram (14 turns). Straight segments with rounded joins, matching how
+// IMS's own track maps are drawn — this is a best-effort reconstruction
+// from the published layout, not surveyed GPS data.
 const TRACK_D =
-  'M 80,410 L 560,410 C 650,410 700,385 700,320 L 700,230 ' +
-  'C 700,170 655,150 590,150 L 470,150 C 425,150 400,128 400,95 ' +
-  'C 400,60 428,38 468,38 L 575,38 C 635,38 668,68 668,112 ' +
-  'C 668,152 638,175 595,175 L 300,175 C 215,175 150,228 150,300 ' +
-  'L 150,325 C 150,372 118,410 80,410 Z'
+  'M700,520 L270,520 L205,495 L160,435 L90,335 L190,295 L250,285 ' +
+  'L300,330 L340,270 L790,335 L775,200 L895,195 L835,55 L1045,120 ' +
+  'L1090,295 L985,335 L1095,400 Z'
+
+const TURNS = [
+  { num: 1, x: 270, y: 520, dx: 0, dy: 34 },
+  { num: 2, x: 205, y: 495, dx: -30, dy: 14 },
+  { num: 3, x: 160, y: 435, dx: -34, dy: 0 },
+  { num: 4, x: 90, y: 335, dx: -36, dy: -6 },
+  { num: 5, x: 190, y: 295, dx: -10, dy: -28 },
+  { num: 6, x: 250, y: 285, dx: 4, dy: -28 },
+  { num: 7, x: 790, y: 335, dx: 0, dy: 34 },
+  { num: 8, x: 775, y: 200, dx: -32, dy: 0 },
+  { num: 9, x: 895, y: 195, dx: 32, dy: 0 },
+  { num: 10, x: 835, y: 55, dx: -12, dy: -28 },
+  { num: 11, x: 1045, y: 120, dx: 22, dy: -22 },
+  { num: 12, x: 1090, y: 295, dx: 34, dy: 0 },
+  { num: 13, x: 985, y: 335, dx: -8, dy: 28 },
+  { num: 14, x: 1095, y: 400, dx: 34, dy: 12 },
+]
 
 const PHASES = [
   {
@@ -39,7 +55,7 @@ export default function TrackScroll() {
   const wrapperRef = useRef(null)
   const pathRef = useRef(null)
   const [progress, setProgress] = useState(0)
-  const [point, setPoint] = useState({ x: 80, y: 410 })
+  const [point, setPoint] = useState({ x: 700, y: 520 })
   const [pathLength, setPathLength] = useState(0)
 
   useEffect(() => {
@@ -100,37 +116,70 @@ export default function TrackScroll() {
           </div>
 
           <div className="relative">
-            <svg viewBox="0 0 800 460" className="w-full h-auto">
+            <svg viewBox="0 0 1150 600" className="w-full h-auto">
               <path
                 ref={pathRef}
                 d={TRACK_D}
                 fill="none"
                 stroke="rgba(255,255,255,0.15)"
-                strokeWidth="6"
+                strokeWidth="12"
+                strokeLinejoin="round"
+                strokeLinecap="round"
               />
               {pathLength > 0 && (
                 <path
                   d={TRACK_D}
                   fill="none"
                   stroke="#38BDF8"
-                  strokeWidth="6"
+                  strokeWidth="12"
+                  strokeLinejoin="round"
                   strokeLinecap="round"
                   strokeDasharray={pathLength}
                   strokeDashoffset={pathLength * (1 - progress)}
                   style={{ transition: 'stroke-dashoffset 60ms linear' }}
                 />
               )}
+
+              {/* Turn number markers */}
+              {TURNS.map((t) => (
+                <g key={t.num}>
+                  <circle
+                    cx={t.x + t.dx}
+                    cy={t.y + t.dy}
+                    r="15"
+                    fill="#0B1638"
+                    stroke="rgba(255,255,255,0.35)"
+                    strokeWidth="1.5"
+                  />
+                  <text
+                    x={t.x + t.dx}
+                    y={t.y + t.dy}
+                    fill="rgba(255,255,255,0.75)"
+                    fontSize="14"
+                    fontFamily="'JetBrains Mono', monospace"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                  >
+                    {t.num}
+                  </text>
+                </g>
+              ))}
+
+              {/* Start/finish marker */}
+              <rect x="640" y="510" width="20" height="20" fill="white" opacity="0.6" />
+
+              {/* Car marker */}
               <circle
                 cx={point.x}
                 cy={point.y}
-                r="11"
+                r="13"
                 fill="#38BDF8"
                 stroke="#05070F"
                 strokeWidth="3"
               />
             </svg>
             <div className="eyebrow text-[10px] text-slate/60 text-center mt-2">
-              2.439-MI INFIELD ROAD COURSE &middot; STYLIZED, NOT TO SCALE
+              2.439-MI INFIELD ROAD COURSE &middot; INDIANAPOLIS MOTOR SPEEDWAY
             </div>
           </div>
         </div>
