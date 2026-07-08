@@ -14,11 +14,12 @@ const PHOTOS = [
 
 export default function Media() {
   return (
-    <section id="media" className="relative bg-ink py-24 md:py-32 overflow-hidden">
+   <section id="media" className="relative bg-ink py-24 md:py-32 overflow-hidden">
+      <FlowingLines className="inset-x-0 top-16 md:top-20 h-[380px] md:h-[440px]" />
+
       <div className="relative max-w-7xl mx-auto px-6 md:px-10">
         <Reveal>
           <div className="relative flex flex-wrap items-end justify-between gap-6 mb-12">
-            <FlowingLines className="inset-x-0 -top-24 h-[120px]" />
             <div className="relative">
               <div className="eyebrow text-sky text-xs mb-4">Media</div>
               <h2 className="font-display font-700 uppercase text-4xl md:text-5xl leading-tight">
@@ -26,7 +27,7 @@ export default function Media() {
                 to the track
               </h2>
             </div>
-            <a
+            
               href="https://www.instagram.com/bayarea.racing/"
               target="_blank"
               rel="noopener noreferrer"
@@ -37,7 +38,7 @@ export default function Media() {
             </a>
           </div>
         </Reveal>
-
+     
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[160px] md:auto-rows-[220px]">
           {PHOTOS.map((p, i) => (
             <Reveal
