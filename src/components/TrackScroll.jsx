@@ -5,10 +5,40 @@ import { Flame, Wind, Gauge } from 'lucide-react'
 // diagram (14 turns). Straight segments with rounded joins, matching how
 // IMS's own track maps are drawn — this is a best-effort reconstruction
 // from the published layout, not surveyed GPS data.
+// Traced from the official Indianapolis Motor Speedway infield road course
+// diagram (14 turns). Curved bezier segments approximating the actual
+// sweeps and chicanes — a best-effort reconstruction from the published
+// layout, not surveyed GPS data.
 const TRACK_D =
-  'M700,520 L270,520 L205,495 L160,435 L90,335 L190,295 L250,285 ' +
-  'L300,330 L340,270 L790,335 L775,200 L895,195 L835,55 L1045,120 ' +
-  'L1090,295 L985,335 L1095,400 Z'
+  'M700,520 ' +
+  'L270,520 ' +
+  'C240,520 210,512 195,495 ' +        // Turn 1
+  'C165,460 140,460 150,435 ' +        // Turn 2 (snake in)
+  'C160,410 120,405 105,380 ' +        // Turn 3 (snake out)
+  'C85,345 70,335 62,318 ' +           // approach Turn 4
+  'C50,295 60,280 85,278 ' +           // Turn 4 hairpin
+  'C115,275 135,290 160,292 ' +        // Turn 5
+  'C185,294 200,280 222,278 ' +        // Turn 6
+  'C255,275 280,295 300,310 ' +        // transition to back straight
+  'L758,335 ' +                        // back straight
+  'C775,340 758,300 758,240 ' +        // Turn 7 (kink up)
+  'L758,205 ' +
+  'C745,198 738,196 735,198 ' +        // Turn 8
+  'C775,197 815,198 855,198 ' +        // chicane top
+  'C875,198 880,160 865,125 ' +        // Turn 9 rising
+  'C845,90 815,72 785,63 ' +           // Turn 10 apex
+  'C815,48 865,65 900,88 ' +           // sweep toward 11
+  'C950,112 990,118 1015,132 ' +       // Turn 11
+  'C1040,148 1058,175 1058,225 ' +     // curve down back stretch
+  'L1058,265 ' +
+  'C1058,280 1060,288 1055,290 ' +     // Turn 12
+  'C1015,298 975,308 950,320 ' +       // sweep toward 13
+  'C935,328 928,332 930,338 ' +        // Turn 13
+  'C955,352 1010,375 1040,388 ' +      // sweep toward 14
+  'C1060,397 1070,400 1055,405 ' +     // Turn 14
+  'C1000,422 930,455 850,478 ' +       // sweep down to front straight
+  'C790,498 740,512 700,520 ' +        // rejoin start/finish
+  'Z'
 
 const TURNS = [
   { num: 1, x: 255, y: 517, dx: 0, dy: 34 },
